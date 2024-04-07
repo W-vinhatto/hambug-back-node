@@ -1,4 +1,5 @@
 import * as Yup from 'yup'
+import Products from '../models/products'
 
 
 class ProductsController {
@@ -15,7 +16,23 @@ class ProductsController {
             return response.status(400).json({error: err.errors})
         }
 
-        return response.json({ok: true})
+        
+        const { filename : path } = request.file
+        const { name, price, category } = request.body
+
+        const products = await Products.create({
+            name,
+            price,
+            category,
+            path
+        })
+        return response.json({products})
+    }
+
+    async index(request, response){
+        const products = await Products.findAll()
+
+        return response.status(200).json(products)
     }
 }
 
