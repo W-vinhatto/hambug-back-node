@@ -1,5 +1,7 @@
 import * as Yup from 'yup'
 import User from '../models/User'
+import jwt from 'jsonwebtoken'
+import authConfig from '../../config/auth'
 
 
 class SessionController {
@@ -35,7 +37,17 @@ class SessionController {
             .json({ error: 'Make sure your password or email are correct' })
         }
 
-        return response.status(200).json({id: user.id, name: user.name, email})
+        return response.status(200).json({
+            id: user.id, 
+            name: user.name, 
+            email,
+            admin: user.admin,
+            tokem: jwt.sign(
+                { id: user.id }, 
+                authConfig.secret ,
+                { expiresIn: authConfig.expiresIn }
+            )
+        })
     }
 }
 
