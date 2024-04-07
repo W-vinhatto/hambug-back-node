@@ -22,6 +22,10 @@ class User extends Model {
 
     return this
     }
+// fazendo verificação se senha enviada pelo body confere com hash de senha
+    checkPassword(password){
+        return Bcrypt.compare(password, this.password_hash)
+    }
 }
 
 export default User
