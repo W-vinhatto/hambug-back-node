@@ -17,7 +17,7 @@ class UserController {
         const schema = Yup.object().shape({
             name: Yup.string().required(),
             email: Yup.string().required().email(),
-            password_hash: Yup.string().required().min(6),
+            password: Yup.string().required().min(6),
             admin: Yup.boolean(),
         })
 // validação de erros que esta sendo feito acima com yup ( dados recebidos tem que está igual acima e chegar corretos)      
@@ -29,13 +29,21 @@ class UserController {
             .json({ error: err.errors })
         }
 
-        const { name, email, password_hash, admin } = request.body
+        const { name, email, password, admin } = request.body
+
+        const userExists = await User.findOne({
+            where: { email },
+        })
+        if(userExists){
+            return response.status(400).json({error:'email já cadastrado'})
+        }
+
 
         const user = await User.create({
             id: v4(),
             name,
             email,
-            password_hash,
+            password,
             admin
         }
         )
