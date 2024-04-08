@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize'
+import mongoose from 'mongoose'
 import confiDataBase from '../config/database'
 import User from '../app/models/User'
 import Products from '../app/models/products'
@@ -9,6 +10,7 @@ const models = [User, Products, Category]
 class Database {
   constructor () {
     this.init()
+    this.mongo()
   }
 
   init () {
@@ -18,6 +20,15 @@ class Database {
     // alem da conexaõ individual - caso haja um associate ele faz a conexão de models
       .map(
         (model) => model.associate && model.associate(this.connection.models))
+  }
+
+  mongo () {
+    this.mongoConnection = mongoose.connect(
+      'mongodb://localhost:27017/base-hamburgueria-node',
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      })
   }
 }
 
