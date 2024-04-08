@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import Products from '../models/products'
+import Products from '../models/Products'
 import Category from '../models/Category'
 
 class ProductsController {
