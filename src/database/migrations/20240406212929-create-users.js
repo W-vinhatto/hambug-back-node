@@ -1,13 +1,11 @@
-
-
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.createTable('users', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true
       },
 
       name: {
@@ -18,36 +16,32 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
+        unique: true
       },
 
       password_hash: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
 
       admin: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
-        allowNull: false,
+        allowNull: false
       },
 
-      created_at:{
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false
       },
-      updated_at:{
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false
       }
-    });
-
+    })
   },
 
-  async down(queryInterface) {
-    await queryInterface.dropTable('users');
-
+  async down (queryInterface) {
+    await queryInterface.dropTable('users')
   }
-};
-
-
+}
