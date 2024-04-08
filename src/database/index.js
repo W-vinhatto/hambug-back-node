@@ -1,10 +1,11 @@
 import  Sequelize  from "sequelize";
 import confiDataBase from '../config/database'
 import User from '../app/models/User'
-import Products from "../app/models/products";
+import Products from "../app/models/products"
+import Category from '../app/models/Category'
 
 
-const models = [User, Products ]
+const models = [User, Products, Category ]
 
 
 class Database {

@@ -5,9 +5,9 @@ module.exports = {
   },
   extends: [
     'standard',
-    'prettier'
+   // 'prettier'
   ],
-  Plugins: ['prettier'],
+ // Plugins: ['prettier'],
   overrides: [
     {
       env: {
@@ -25,8 +25,8 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  rules: {
+  /*rules: {
     camelcase: 'off',
     "prettier/prettier": "error",
-  }
+  }*/
 }
