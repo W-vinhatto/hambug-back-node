@@ -1,12 +1,15 @@
 import express from 'express'
 import routes from './routes'
 import { resolve } from 'path'
+import cors from 'cors'
 
 import './database'
 
 class App {
   constructor () {
     this.app = express()
+    // politica de cors tem que ficar acima dos demais this
+    this.app.use(cors())
 
     this.middlewares()
     this.routes()

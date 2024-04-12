@@ -20,6 +20,7 @@ class CategoryController {
       return response.status(400).json()
     }
 
+    // validação caso category já existe
     const { name } = request.body
 
     const categoryExists = await Category.findOne({
@@ -60,6 +61,15 @@ class CategoryController {
     }
 
     const { name } = request.body
+
+    // validação caso name category já existe
+
+    const categoryNameExists = await Category.findOne({
+      where: { name }
+    })
+    if (categoryNameExists) {
+      return response.status(400).json({ error: 'category alreandy exists' })
+    }
     const { id } = request.params
 
     const categoryExists = await Category.findByPk(id)
